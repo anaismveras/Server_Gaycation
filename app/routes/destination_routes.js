@@ -45,7 +45,8 @@ router.get('/destinations', requireToken, (req, res, next) => {
 router.get('/destinations/gaycations/:destinationId', requireToken, (req, res, next) => {
     Destination.find({
         roadGoatId: req.params.destinationId
-    }).populate('reviews')
+    })
+    .populate('reviews')
     .then(des => {
         res.json(des)
     })
@@ -55,7 +56,7 @@ router.get('/destinations/gaycations/:destinationId', requireToken, (req, res, n
 // GET --> show ONE destination by ID
 router.get('/destination/:destinationId', requireToken, (req, res, next) => {
     const key_value = `${req.params.destinationId}`
-    console.log('this is key value', key_value)
+    // console.log('this is key value', key_value)
     axios.get(`https://api.roadgoat.com/api/v2/destinations/${key_value}`, {
         headers: { 
             'Authorization': `Basic ${process.env.AUTH_KEY}`
@@ -66,7 +67,6 @@ router.get('/destination/:destinationId', requireToken, (req, res, next) => {
     })
     .catch(next)
 })
-
 
 // POST create a destination into database, based on user fave gaycations
 router.post('/destinations', requireToken, (req, res, next) => {
