@@ -37,7 +37,7 @@ router.get('/businesses/:destinationId', (req, res, next) => {
     .catch(next)
 })
 
-// // POST --> create a buisness put it in db
+// POST --> create a buisness put it in db
 router.post('/businesses/:destinationId', (req, res, next) => {
     Destination.findById(req.params.destinationId)
     .then(des => {
